@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Contact — Ezio Infotech digital solutions"
+    />
+    <title>Contact | Ezio Infotech</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="container nav">
+        <a class="logo" href="index.html"
+          ><span class="logo-mark"><img src="image/eziologo.png" alt=""></span
+          ><span>EZIO<small>INFOTECH</small></span></a
+        >
+        <nav class="links" id="navMenu">
+          <a href="index.html">Home</a><a href="about.html">About</a
+          ><a href="services.html">Services</a
+          ><a href="products.html">Products</a><a href="team.html">Team</a
+          ><a href="blog.html">Blog</a><a href="career.html">Career</a
+          ><a href="contact.html">Contact</a>
+        </nav>
+        <div class="actions">
+          <button class="icon" id="themeToggle">
+            <i class="ri-moon-line"></i></button
+          ><button class="menu" id="menuToggle">
+            <i class="ri-menu-3-line"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main>
+      <section class="pagehero">
+        <div class="container">
+          <span class="label">CONTACT</span>
+          <h1>Let's create something <span>worth building.</span></h1>
+          <p>
+            Have a project, product idea or software requirement? Start a
+            conversation with Ezio Infotech.
+          </p>
+        </div>
+      </section>
+      <section class="section">
+        <div class="container contact">
+          <div>
+            <span class="label">EZIO INFOTECH</span>
+            <h2>Tell us what you're <span>building.</span></h2>
+            <p class="lead">
+              We can help with web design, web development, Android and iOS
+              apps, custom software and testing.
+            </p>
+            <div class="contact-item">
+              <i class="ri-map-pin-line"></i>
+              <div>
+                <small>OFFICE</small>
+                <p>Pune, Maharashtra, India</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <i class="ri-phone-line"></i>
+              <div>
+                <small>PHONE</small>
+                <p>+91 99605 88439</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <i class="ri-mail-line"></i>
+              <div>
+                <small>EMAIL</small>
+                <p>ravindra.chaudhari@ezioinfotech.com</p>
+              </div>
+            </div>
+          </div>
+          <form
+            onsubmit="
+              event.preventDefault();
+              showToast('Thanks! We will get back to you soon.');
+            "
+          >
+            <label>Name<input required placeholder="Your name" /></label
+            ><label
+              >Email<input
+                required
+                type="email"
+                placeholder="you@company.com" /></label
+            ><label
+              >Service<select>
+                <option>Web Development</option>
+                <option>Web Design</option>
+                <option>Android App Development</option>
+                <option>iOS App Development</option>
+                <option>Custom Software Development</option>
+                <option>Software Testing</option>
+              </select></label
+            ><label
+              >Project details<textarea
+                required
+                rows="6"
+                placeholder="Tell us about your requirement..."
+              ></textarea></label
+            ><button class="btn primary">
+              Send Enquiry <i class="ri-arrow-right-up-line"></i>
+            </button>
+          </form>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div>
+          <a class="logo" href="index.html"
+            ><span class="logo-mark"><img src="image/eziologo.png" alt=""></span
+            ><span>EZIO<small>INFOTECH</small></span></a
+          >
+          <p>Digital solutions for businesses ready to move forward.</p>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <a href="about.html">About</a><a href="services.html">Services</a
+          ><a href="products.html">Products</a>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <a href="team.html">Team</a><a href="blog.html">Blog</a
+          ><a href="career.html">Career</a>
+        </div>
+        <div>
+          <h4>Connect</h4>
+          <a href="contact.html">Contact</a><a href="#">LinkedIn</a
+          ><a href="#">Instagram</a>
+        </div>
+      </div>
+      <div class="container bottom">
+        <span>© 2026 Ezio Infotech. All rights reserved.</span
+        ><span>Pune, Maharashtra, India</span>
+      </div>
+    </footer>
+    <div class="floating-contact">
+      <a
+        href="tel:+919960588439"
+        class="float-contact phone"
+        aria-label="Call Ezio Infotech"
+      >
+        <i class="ri-phone-fill"></i>
+
+        <span>Call Us</span>
+      </a>
+
+      <a
+        href="https://wa.me/919960588439"
+        class="float-contact whatsapp"
+        target="_blank"
+        rel="noopener"
+        aria-label="Chat on WhatsApp"
+      >
+        <i class="ri-whatsapp-line"></i>
+
+        <span>WhatsApp</span>
+      </a>
+    </div>
+    <script src="js/script.js"></script>
+  </body>
+</html>
