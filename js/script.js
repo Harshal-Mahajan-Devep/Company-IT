@@ -1,3 +1,11 @@
+/* ==========================================
+   DISABLE RIGHT CLICK
+========================================== */
+
+document.addEventListener("contextmenu", function (event) {
+  event.preventDefault();
+});
+
 const $ = (s) => document.querySelector(s);
 const theme = $("#themeToggle"),
   menu = $("#menuToggle"),
@@ -647,3 +655,106 @@ function copyBlogLink() {
       showCommentToast("Unable to copy link.");
     });
 }
+
+/* =====================================================
+   TEAM IMAGE SLIDER
+===================================================== */
+
+const teamSlides = document.querySelectorAll(".team-slide");
+
+const teamNext = document.getElementById("teamNext");
+
+const teamPrev = document.getElementById("teamPrev");
+
+let currentTeamSlide = 0;
+
+let teamIsAnimating = false;
+
+/* =====================================================
+   SHOW SLIDE
+===================================================== */
+
+function showTeamSlide(newIndex, direction = "next") {
+  if (teamIsAnimating || !teamSlides.length) {
+    return;
+  }
+
+  teamIsAnimating = true;
+
+  const currentSlide = teamSlides[currentTeamSlide];
+
+  let nextIndex = newIndex;
+
+  if (nextIndex < 0) {
+    nextIndex = teamSlides.length - 1;
+  }
+
+  if (nextIndex >= teamSlides.length) {
+    nextIndex = 0;
+  }
+
+  const nextSlide = teamSlides[nextIndex];
+
+  /* Remove old classes */
+
+  teamSlides.forEach((slide) => {
+    slide.classList.remove("active", "slide-next", "slide-prev");
+  });
+
+  /* Prepare new slide */
+
+  nextSlide.classList.add(direction === "next" ? "slide-next" : "slide-prev");
+
+  nextSlide.classList.add("active");
+
+  currentTeamSlide = nextIndex;
+
+  setTimeout(() => {
+    teamIsAnimating = false;
+  }, 650);
+}
+
+/* =====================================================
+   NEXT
+===================================================== */
+
+function nextTeamSlide() {
+  showTeamSlide(currentTeamSlide + 1, "next");
+}
+
+/* =====================================================
+   PREVIOUS
+===================================================== */
+
+function previousTeamSlide() {
+  showTeamSlide(currentTeamSlide - 1, "prev");
+}
+
+/* =====================================================
+   BUTTON EVENTS
+===================================================== */
+
+teamNext?.addEventListener("click", nextTeamSlide);
+
+teamPrev?.addEventListener("click", previousTeamSlide);
+
+/* =====================================================
+   AUTO SLIDE
+===================================================== */
+
+let teamAutoSlide = setInterval(nextTeamSlide, 3000);
+
+/* =====================================================
+   RESET AUTO SLIDE
+   After manual click
+===================================================== */
+
+function resetTeamAutoSlide() {
+  clearInterval(teamAutoSlide);
+
+  teamAutoSlide = setInterval(nextTeamSlide, 3000);
+}
+
+teamNext?.addEventListener("click", resetTeamAutoSlide);
+
+teamPrev?.addEventListener("click", resetTeamAutoSlide);
