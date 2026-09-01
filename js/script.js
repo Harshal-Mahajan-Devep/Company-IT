@@ -6,43 +6,6 @@ document.addEventListener("contextmenu", function (event) {
   event.preventDefault();
 });
 
-/* =====================================================
-   PREMIUM INTRO
-===================================================== */
-
-const siteIntro = document.getElementById("siteIntro");
-
-if (siteIntro) {
-  /*
-   * Intro duration:
-   * 3000ms = 3 seconds
-   */
-
-  const introTimer = setTimeout(() => {
-    siteIntro.classList.add("hide");
-
-    /*
-     * Remove intro after
-     * exit animation
-     */
-
-    setTimeout(() => {
-      siteIntro.remove();
-    }, 850);
-  }, 3000);
-
-  /*
-   * Safety fallback
-   */
-
-  window.addEventListener(
-    "pagehide",
-    () => {
-      clearTimeout(introTimer);
-    },
-    { once: true },
-  );
-}
 
 const $ = (s) => document.querySelector(s);
 const theme = $("#themeToggle"),

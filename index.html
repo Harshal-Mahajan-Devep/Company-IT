@@ -12,57 +12,6 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <!-- =========================================
-     PREMIUM INTRO
-========================================= -->
-
-    <div class="site-intro" id="siteIntro">
-      <div class="intro-bg-grid"></div>
-
-      <div class="intro-glow intro-glow-1"></div>
-      <div class="intro-glow intro-glow-2"></div>
-
-      <div class="intro-content">
-        <!-- Logo Animation -->
-
-        <div class="intro-logo-wrap">
-          <div class="intro-ring ring-1"></div>
-
-          <div class="intro-ring ring-2"></div>
-
-          <div class="intro-ring ring-3"></div>
-
-          <div class="intro-logo">
-            <img src="image/eziologo.png" alt="Ezio Infotech" />
-          </div>
-        </div>
-
-        <!-- Company Name -->
-
-        <div class="intro-brand">
-          <div class="intro-ezio">EZIO</div>
-
-          <div class="intro-infotech">INFOTECH</div>
-        </div>
-
-        <!-- Animated Line -->
-
-        <div class="intro-progress">
-          <span></span>
-        </div>
-
-        <!-- Small Loading Text -->
-
-        <div class="intro-loading">
-          <span>BUILDING DIGITAL EXPERIENCES</span>
-
-          <i></i>
-          <i></i>
-          <i></i>
-        </div>
-      </div>
-    </div>
-
     <header>
       <div class="container nav">
         <a class="logo" href="index.html"
@@ -596,5 +545,34 @@
       </a>
     </div>
     <script src="js/script.js"></script>
+    <!-- <script>
+      (function () {
+        const lastTime = localStorage.getItem("ezio_intro_session_time");
+        const currentTime = new Date().getTime();
+        const EXPIRATION_TIME = 60 * 100; // 1 Minute
+
+        if (
+          !lastTime ||
+          currentTime - parseInt(lastTime, 10) >= EXPIRATION_TIME
+        ) {
+          window.location.replace("splash.html");
+        }
+      })();
+    </script> -->
+    <script>
+      (function () {
+        const lastTime = localStorage.getItem("ezio_intro_session_time");
+        const currentTime = new Date().getTime();
+        const EXPIRATION_TIME = 10 * 1000; // 10 Seconds
+
+        // १० सेकंद पूर्ण झाले असतील किंवा पहिल्यांदा उघडत असेल तर splash.html वर पाठवा
+        if (
+          !lastTime ||
+          currentTime - parseInt(lastTime, 10) >= EXPIRATION_TIME
+        ) {
+          window.location.replace("splash.html");
+        }
+      })();
+    </script>
   </body>
 </html>
