@@ -6,61 +6,42 @@ document.addEventListener("contextmenu", function (event) {
   event.preventDefault();
 });
 
+/* =====================================================
+   PREMIUM INTRO
+===================================================== */
+
 const siteIntro = document.getElementById("siteIntro");
 
 if (siteIntro) {
   /*
-   * Check if user has already
-   * seen the intro
+   * Intro duration:
+   * 3000ms = 3 seconds
    */
 
-  const introAlreadySeen = localStorage.getItem("ezioIntroSeen");
-
-  if (introAlreadySeen === "true") {
-    /*
-     * Already seen:
-     * Don't show intro
-     */
-
-    siteIntro.remove();
-  } else {
-    /*
-     * First visit:
-     * Show intro
-     */
-
-    const introTimer = setTimeout(() => {
-      siteIntro.classList.add("hide");
-
-      /*
-       * Remember that intro
-       * has been shown
-       */
-
-      localStorage.setItem("ezioIntroSeen", "true");
-
-      /*
-       * Remove intro after
-       * fade animation
-       */
-
-      setTimeout(() => {
-        siteIntro.remove();
-      }, 850);
-    }, 3000);
+  const introTimer = setTimeout(() => {
+    siteIntro.classList.add("hide");
 
     /*
-     * Safety cleanup
+     * Remove intro after
+     * exit animation
      */
 
-    window.addEventListener(
-      "pagehide",
-      () => {
-        clearTimeout(introTimer);
-      },
-      { once: true },
-    );
-  }
+    setTimeout(() => {
+      siteIntro.remove();
+    }, 850);
+  }, 3000);
+
+  /*
+   * Safety fallback
+   */
+
+  window.addEventListener(
+    "pagehide",
+    () => {
+      clearTimeout(introTimer);
+    },
+    { once: true },
+  );
 }
 
 const $ = (s) => document.querySelector(s);
