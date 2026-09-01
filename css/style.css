@@ -1590,25 +1590,415 @@ p {
   margin: 3px 0;
   color: var(--text);
 }
-form {
-  display: grid;
-  gap: 16px;
+/* =====================================================
+   DYNAMIC CONTACT FORM
+===================================================== */
+
+.dynamic-contact-form {
+  width: 100%;
 }
-label {
+
+/* =====================================================
+   INQUIRY TYPE
+===================================================== */
+
+.inquiry-type {
+  margin-bottom: 25px;
+}
+
+.form-title {
+  display: block;
+
+  margin-bottom: 12px;
+
+  color: var(--text);
+
   font-size: 12px;
+
   font-weight: 700;
 }
-input,
-textarea,
-select {
-  width: 100%;
-  margin-top: 7px;
-  padding: 14px;
+
+.inquiry-options {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 10px;
+}
+
+.inquiry-option {
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  min-height: 65px;
+
+  padding: 12px;
+
+  box-sizing: border-box;
+
   border: 1px solid var(--line);
-  border-radius: 12px;
+
+  border-radius: 13px;
+
   background: var(--card);
+
+  cursor: pointer;
+
+  transition: 0.25s ease;
+}
+
+.inquiry-option:hover {
+  border-color: var(--lime2);
+
+  transform: translateY(-2px);
+}
+
+.inquiry-option input {
+  position: absolute;
+
+  opacity: 0;
+
+  pointer-events: none;
+}
+
+/* =====================================================
+   CUSTOM CHECKBOX
+===================================================== */
+
+.custom-check {
+  width: 22px;
+
+  height: 22px;
+
+  min-width: 22px;
+
+  display: grid;
+
+  place-items: center;
+
+  border: 1px solid var(--line);
+
+  border-radius: 7px;
+
+  color: #111;
+
+  transition: 0.25s ease;
+}
+
+.custom-check i {
+  font-size: 14px;
+
+  opacity: 0;
+
+  transform: scale(0.5);
+
+  transition: 0.2s ease;
+}
+
+/* Selected */
+
+.inquiry-option:has(input:checked) {
+  border-color: var(--lime2);
+
+  background: rgba(190, 255, 100, 0.06);
+}
+
+.inquiry-option:has(input:checked) .custom-check {
+  background: var(--lime);
+
+  border-color: var(--lime);
+}
+
+.inquiry-option:has(input:checked) .custom-check i {
+  opacity: 1;
+
+  transform: scale(1);
+}
+
+.inquiry-text {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+.inquiry-text strong {
   color: var(--text);
-  outline: 0;
+
+  font-size: 11px;
+}
+
+.inquiry-text small {
+  color: var(--muted);
+
+  font-size: 8px;
+}
+
+/* =====================================================
+   FORM GRID
+===================================================== */
+
+.form-grid {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 15px;
+}
+
+/* =====================================================
+   FORM LABEL
+===================================================== */
+
+.dynamic-contact-form label {
+  display: block;
+
+  color: var(--text);
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  margin-bottom: 15px;
+}
+
+.dynamic-contact-form input,
+.dynamic-contact-form select,
+.dynamic-contact-form textarea {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  margin-top: 7px;
+
+  padding: 13px;
+
+  border: 1px solid var(--line);
+
+  border-radius: 11px;
+
+  outline: none;
+
+  background: var(--bg);
+
+  color: var(--text);
+
+  font-family: inherit;
+
+  font-size: 12px;
+
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.dynamic-contact-form textarea {
+  resize: vertical;
+
+  min-height: 130px;
+}
+
+.dynamic-contact-form input:focus,
+.dynamic-contact-form select:focus,
+.dynamic-contact-form textarea:focus {
+  border-color: var(--lime2);
+
+  box-shadow: 0 0 0 3px rgba(190, 255, 100, 0.08);
+}
+
+/* =====================================================
+   DYNAMIC OPTIONS
+===================================================== */
+
+.dynamic-option-wrapper {
+  display: none;
+}
+
+.dynamic-option {
+  display: none;
+}
+
+.dynamic-option.active {
+  display: block;
+}
+
+/* =====================================================
+   FORM ERROR
+===================================================== */
+
+.form-error {
+  display: block;
+
+  min-height: 13px;
+
+  margin-top: 5px;
+
+  color: #e25b5b;
+
+  font-size: 9px;
+
+  font-weight: 500;
+}
+
+/* =====================================================
+   CAPTCHA
+===================================================== */
+
+.contact-captcha {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 15px;
+
+  margin-top: 2px;
+}
+
+.contact-captcha label {
+  margin-bottom: 0;
+}
+
+.captcha-display {
+  height: 35px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin-top: px;
+
+  padding: 2px 10px;
+
+  box-sizing: border-box;
+
+  border: 1px solid var(--line);
+
+  border-radius: 11px;
+
+  background: var(--bg);
+}
+
+#contactCaptchaCode {
+  font: italic 700 16px "Space Grotesk";
+
+  letter-spacing: 4px;
+
+  user-select: none;
+}
+
+#refreshContactCaptcha {
+  width: 30px;
+
+  height: 30px;
+
+  display: grid;
+
+  place-items: center;
+
+  border: 0;
+
+  border-radius: 8px;
+
+  background: var(--card);
+
+  color: var(--text);
+
+  cursor: pointer;
+
+  transition: 0.25s ease;
+}
+
+#refreshContactCaptcha:hover {
+  background: var(--lime);
+
+  color: #111;
+
+  transform: rotate(90deg);
+}
+
+.captcha-input input {
+  height: 45px;
+}
+
+/* =====================================================
+   SUBMIT
+===================================================== */
+
+.contact-submit {
+  margin-top: 8px;
+
+  cursor: pointer;
+}
+
+/* =====================================================
+   SUCCESS STATE
+===================================================== */
+
+.dynamic-contact-form.success {
+  animation: formSuccess 0.4s ease;
+}
+
+@keyframes formSuccess {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(0.99);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 800px) {
+  .inquiry-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .inquiry-option {
+    min-height: 55px;
+  }
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+
+    gap: 0;
+  }
+
+  .contact-captcha {
+    grid-template-columns: 1fr;
+
+    gap: 0;
+  }
+
+  .dynamic-contact-form input,
+  .dynamic-contact-form select,
+  .dynamic-contact-form textarea {
+    font-size: 13px;
+
+    padding: 12px;
+  }
 }
 /* ==========================================
    HAPPY CLIENTS / TESTIMONIALS
@@ -2601,15 +2991,20 @@ select {
   opacity: 1;
   transform: none;
 }
+
 .toast {
   position: fixed;
-  right: 20px;
+  left: 50%;
   bottom: 20px;
+  transform: translateX(-50%);
   background: var(--text);
   color: var(--bg);
   padding: 14px 18px;
   border-radius: 12px;
   z-index: 100;
+  text-align: center;
+  max-width: calc(100% - 40px);
+  box-sizing: border-box;
 }
 
 /* ========================================
@@ -4242,5 +4637,19 @@ select {
 
   .related-grid {
     grid-template-columns: 1fr;
+  }
+
+  .toast {
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+
+    transform: none;
+
+    width: auto;
+
+    padding: 13px 15px;
+
+    font-size: 12px;
   }
 }

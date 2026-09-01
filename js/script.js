@@ -796,3 +796,327 @@ function resetTeamAutoSlide() {
 teamNext?.addEventListener("click", resetTeamAutoSlide);
 
 teamPrev?.addEventListener("click", resetTeamAutoSlide);
+
+/* =====================================================
+   DYNAMIC CONTACT FORM
+===================================================== */
+
+const contactForm = document.getElementById("contactForm");
+
+if (contactForm) {
+  /* ===================================================
+     ELEMENTS
+  =================================================== */
+
+  const inquiryCheckboxes = document.querySelectorAll(
+    'input[name="inquiryType"]',
+  );
+
+  const dynamicWrapper = document.getElementById("dynamicOptionWrapper");
+
+  const projectOptions = document.getElementById("projectOptions");
+
+  const serviceOptions = document.getElementById("serviceOptions");
+
+  const projectType = document.getElementById("projectType");
+
+  const serviceType = document.getElementById("serviceType");
+
+  const captchaCode = document.getElementById("contactCaptchaCode");
+
+  const captchaInput = document.getElementById("contactCaptchaInput");
+
+  const refreshCaptcha = document.getElementById("refreshContactCaptcha");
+
+  let currentCaptcha = "";
+
+  /* ===================================================
+     CAPTCHA
+  =================================================== */
+
+  function generateCaptcha() {
+    const characters = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+    let result = "";
+
+    for (let i = 0; i < 5; i++) {
+      result += characters.charAt(
+        Math.floor(Math.random() * characters.length),
+      );
+    }
+
+    currentCaptcha = result;
+
+    captchaCode.textContent = result;
+  }
+
+  refreshCaptcha.addEventListener("click", generateCaptcha);
+
+  generateCaptcha();
+
+  /* ===================================================
+     INQUIRY TYPE
+  =================================================== */
+
+  inquiryCheckboxes.forEach((checkbox) => {
+    checkbox.addEventListener("change", function () {
+      /*
+       * Only one option at a time
+       */
+
+      inquiryCheckboxes.forEach((other) => {
+        if (other !== checkbox) {
+          other.checked = false;
+        }
+      });
+
+      /*
+       * Reset dynamic sections
+       */
+
+      projectOptions.classList.remove("active");
+
+      serviceOptions.classList.remove("active");
+
+      projectType.value = "";
+
+      serviceType.value = "";
+
+      /*
+       * Nothing selected
+       */
+
+      if (!checkbox.checked) {
+        dynamicWrapper.style.display = "none";
+
+        return;
+      }
+
+      /*
+       * Project
+       */
+
+      if (checkbox.value === "project") {
+        dynamicWrapper.style.display = "block";
+
+        projectOptions.classList.add("active");
+      } else if (checkbox.value === "service") {
+        /*
+         * Service
+         */
+        dynamicWrapper.style.display = "block";
+
+        serviceOptions.classList.add("active");
+      } else {
+        /*
+         * Contact
+         */
+        dynamicWrapper.style.display = "none";
+      }
+    });
+  });
+
+  /* ===================================================
+     ERROR FUNCTIONS
+  =================================================== */
+
+  function setError(id, message) {
+    const element = document.getElementById(id);
+
+    if (element) {
+      element.textContent = message;
+    }
+  }
+
+  function clearErrors() {
+    setError("inquiryError", "");
+
+    setError("nameError", "");
+
+    setError("emailError", "");
+
+    setError("phoneError", "");
+
+    setError("messageError", "");
+
+    setError("captchaError", "");
+  }
+
+  /* ===================================================
+     EMAIL VALIDATION
+  =================================================== */
+
+  function validEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  /* ===================================================
+     PHONE VALIDATION
+  =================================================== */
+
+  function validPhone(phone) {
+    const cleaned = phone.replace(/[\s\-()+]/g, "");
+
+    return /^[0-9]{10,13}$/.test(cleaned);
+  }
+
+  /* ===================================================
+     FORM SUBMIT
+  =================================================== */
+
+  contactForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    clearErrors();
+
+    const selectedType = document.querySelector(
+      'input[name="inquiryType"]:checked',
+    );
+
+    const name = document.getElementById("contactName").value.trim();
+
+    const email = document.getElementById("contactEmail").value.trim();
+
+    const phone = document.getElementById("contactPhone").value.trim();
+
+    const message = document.getElementById("contactMessage").value.trim();
+
+    const captcha = captchaInput.value.trim().toUpperCase();
+
+    let valid = true;
+
+    /* -----------------------------------------------
+         Inquiry
+      ----------------------------------------------- */
+
+    if (!selectedType) {
+      setError("inquiryError", "Please select Project, Service or Contact.");
+
+      valid = false;
+    }
+
+    /* -----------------------------------------------
+         Name
+      ----------------------------------------------- */
+
+    if (name.length < 2) {
+      setError("nameError", "Please enter your name.");
+
+      valid = false;
+    }
+
+    /* -----------------------------------------------
+         Email
+      ----------------------------------------------- */
+
+    if (!validEmail(email)) {
+      setError("emailError", "Please enter a valid email.");
+
+      valid = false;
+    }
+
+    /* -----------------------------------------------
+         Phone
+      ----------------------------------------------- */
+
+    if (!validPhone(phone)) {
+      setError("phoneError", "Please enter a valid phone number.");
+
+      valid = false;
+    }
+
+    /* -----------------------------------------------
+         Project
+      ----------------------------------------------- */
+
+    if (
+      selectedType &&
+      selectedType.value === "project" &&
+      !projectType.value
+    ) {
+      setError("messageError", "Please select your project technology.");
+
+      valid = false;
+    }
+
+    /* -----------------------------------------------
+         Service
+      ----------------------------------------------- */
+
+    if (
+      selectedType &&
+      selectedType.value === "service" &&
+      !serviceType.value
+    ) {
+      setError("messageError", "Please select a service.");
+
+      valid = false;
+    }
+
+    /* -----------------------------------------------
+         Message
+      ----------------------------------------------- */
+
+    if (message.length < 10) {
+      setError("messageError", "Please enter your message.");
+
+      valid = false;
+    }
+
+    /* -----------------------------------------------
+         CAPTCHA
+      ----------------------------------------------- */
+
+    if (captcha !== currentCaptcha) {
+      setError("captchaError", "Incorrect security code.");
+
+      valid = false;
+    }
+
+    /* -----------------------------------------------
+         STOP
+      ----------------------------------------------- */
+
+    if (!valid) {
+      return;
+    }
+
+    /* -----------------------------------------------
+         SUCCESS
+      ----------------------------------------------- */
+
+    contactForm.classList.add("success");
+
+    if (typeof showToast === "function") {
+      showToast("Thanks! We will get back to you soon.");
+    } else {
+      alert("Thanks! We will get back to you soon.");
+    }
+
+    /*
+     * Reset form
+     */
+
+    contactForm.reset();
+
+    inquiryCheckboxes.forEach((checkbox) => {
+      checkbox.checked = false;
+    });
+
+    dynamicWrapper.style.display = "none";
+
+    projectOptions.classList.remove("active");
+
+    serviceOptions.classList.remove("active");
+
+    projectType.value = "";
+
+    serviceType.value = "";
+
+    generateCaptcha();
+
+    setTimeout(() => {
+      contactForm.classList.remove("success");
+    }, 500);
+  });
+}

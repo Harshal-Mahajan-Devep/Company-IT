@@ -61,7 +61,10 @@
               <i class="ri-map-pin-line"></i>
               <div>
                 <small>OFFICE</small>
-                <p>Pune, Maharashtra, India</p>
+                <p>
+                  NEBC CORNER Office No 309 Second Floor Near Savata Maharaj
+                  Mandir, Aher Wadi Chowk, Jadhavwadi Pune 412114
+                </p>
               </div>
             </div>
             <div class="contact-item">
@@ -79,35 +82,220 @@
               </div>
             </div>
           </div>
-          <form
-            onsubmit="
-              event.preventDefault();
-              showToast('Thanks! We will get back to you soon.');
-            "
-          >
-            <label>Name<input required placeholder="Your name" /></label
-            ><label
-              >Email<input
-                required
-                type="email"
-                placeholder="you@company.com" /></label
-            ><label
-              >Service<select>
-                <option>Web Development</option>
-                <option>Web Design</option>
-                <option>Android App Development</option>
-                <option>iOS App Development</option>
-                <option>Custom Software Development</option>
-                <option>Software Testing</option>
-              </select></label
-            ><label
-              >Project details<textarea
-                required
+          <!-- =========================================
+     CONTACT FORM
+========================================= -->
+
+          <form id="contactForm" class="dynamic-contact-form" novalidate>
+            <!-- INQUIRY TYPE -->
+
+            <div class="inquiry-type">
+              <label class="form-title"> What are you looking for? </label>
+
+              <div class="inquiry-options">
+                <label class="inquiry-option">
+                  <input type="checkbox" name="inquiryType" value="project" />
+
+                  <span class="custom-check">
+                    <i class="ri-check-line"></i>
+                  </span>
+
+                  <span class="inquiry-text">
+                    <strong>Project</strong>
+                    <small>Build something new</small>
+                  </span>
+                </label>
+
+                <label class="inquiry-option">
+                  <input type="checkbox" name="inquiryType" value="service" />
+
+                  <span class="custom-check">
+                    <i class="ri-check-line"></i>
+                  </span>
+
+                  <span class="inquiry-text">
+                    <strong>Service</strong>
+                    <small>Explore our services</small>
+                  </span>
+                </label>
+
+                <label class="inquiry-option">
+                  <input type="checkbox" name="inquiryType" value="contact" />
+
+                  <span class="custom-check">
+                    <i class="ri-check-line"></i>
+                  </span>
+
+                  <span class="inquiry-text">
+                    <strong>Contact</strong>
+                    <small>Get in touch with us</small>
+                  </span>
+                </label>
+              </div>
+
+              <small id="inquiryError" class="form-error"></small>
+            </div>
+
+            <!-- BASIC DETAILS -->
+
+            <div class="form-grid">
+              <label>
+                Name
+
+                <input
+                  id="contactName"
+                  name="name"
+                  type="text"
+                  placeholder="Your name"
+                  autocomplete="name"
+                />
+
+                <small id="nameError" class="form-error"></small>
+              </label>
+
+              <label>
+                Email
+
+                <input
+                  id="contactEmail"
+                  name="email"
+                  type="email"
+                  placeholder="you@company.com"
+                  autocomplete="email"
+                />
+
+                <small id="emailError" class="form-error"></small>
+              </label>
+            </div>
+
+            <!-- PHONE -->
+
+            <label>
+              Phone Number
+
+              <input
+                id="contactPhone"
+                name="phone"
+                type="tel"
+                placeholder="+91 98765 43210"
+                autocomplete="tel"
+                maxlength="15"
+              />
+
+              <small id="phoneError" class="form-error"></small>
+            </label>
+
+            <!-- PROJECT / SERVICE OPTIONS -->
+
+            <div id="dynamicOptionWrapper" class="dynamic-option-wrapper">
+              <!-- PROJECT -->
+
+              <div id="projectOptions" class="dynamic-option">
+                <label>
+                  Project Type
+
+                  <select id="projectType" name="projectType">
+                    <option value="">Select project technology</option>
+
+                    <option value="Java">Java</option>
+
+                    <option value="React JS">React JS</option>
+
+                    <option value="PHP">PHP</option>
+
+                    <option value="React Native (App)">
+                      React Native (App)
+                    </option>
+
+                    <option value="Other">Other</option>
+                  </select>
+                </label>
+              </div>
+
+              <!-- SERVICE -->
+
+              <div id="serviceOptions" class="dynamic-option">
+                <label>
+                  Service
+
+                  <select id="serviceType" name="serviceType">
+                    <option value="">Select a service</option>
+
+                    <option value="Web Development">Web Development</option>
+
+                    <option value="Web Design">Web Design</option>
+
+                    <option value="Android App Development">
+                      Android App Development
+                    </option>
+
+                    <option value="iOS App Development">
+                      iOS App Development
+                    </option>
+
+                    <option value="Custom Software Development">
+                      Custom Software Development
+                    </option>
+
+                    <option value="Software Testing">Software Testing</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+
+            <!-- MESSAGE -->
+
+            <label>
+              Message
+
+              <textarea
+                id="contactMessage"
+                name="message"
                 rows="6"
                 placeholder="Tell us about your requirement..."
-              ></textarea></label
-            ><button class="btn primary">
-              Send Enquiry <i class="ri-arrow-right-up-line"></i>
+              ></textarea>
+
+              <small id="messageError" class="form-error"></small>
+            </label>
+
+            <!-- CAPTCHA -->
+
+            <div class="contact-captcha">
+              <div class="captcha-box">
+                <label> Security Code </label>
+
+                <div class="captcha-display">
+                  <strong id="contactCaptchaCode"> A7K4P </strong>
+
+                  <button
+                    type="button"
+                    id="refreshContactCaptcha"
+                    aria-label="Refresh captcha"
+                  >
+                    <i class="ri-refresh-line"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="captcha-input">
+                <input
+                  id="contactCaptchaInput"
+                  type="text"
+                  placeholder="Enter code"
+                  maxlength="5"
+                  autocomplete="off"
+                />
+
+                <small id="captchaError" class="form-error"></small>
+              </div>
+            </div>
+
+            <!-- SUBMIT -->
+
+            <button type="submit" class="btn primary contact-submit">
+              Send Enquiry
+
+              <i class="ri-arrow-right-up-line"></i>
             </button>
           </form>
         </div>
