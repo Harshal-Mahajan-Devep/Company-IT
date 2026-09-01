@@ -545,27 +545,13 @@
       </a>
     </div>
     <script src="js/script.js"></script>
-    <!-- <script>
-      (function () {
-        const lastTime = localStorage.getItem("ezio_intro_session_time");
-        const currentTime = new Date().getTime();
-        const EXPIRATION_TIME = 60 * 100; // 1 Minute
-
-        if (
-          !lastTime ||
-          currentTime - parseInt(lastTime, 10) >= EXPIRATION_TIME
-        ) {
-          window.location.replace("splash.html");
-        }
-      })();
-    </script> -->
     <script>
       (function () {
         const lastTime = localStorage.getItem("ezio_intro_session_time");
         const currentTime = new Date().getTime();
-        const EXPIRATION_TIME = 10 * 1000; // 10 Seconds
+        const EXPIRATION_TIME = 10 * 60 * 1000; // 10 Minutes
 
-        // १० सेकंद पूर्ण झाले असतील किंवा पहिल्यांदा उघडत असेल तर splash.html वर पाठवा
+        // जर १० मिनिटे पूर्ण झाली असतील किंवा पहिल्यांदा उघडत असेल तर splash.html वर पाठवा
         if (
           !lastTime ||
           currentTime - parseInt(lastTime, 10) >= EXPIRATION_TIME

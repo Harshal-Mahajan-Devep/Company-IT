@@ -13,12 +13,12 @@
       href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css"
     />
     <script>
-      // 1. Session Timer Check (10 Seconds)
       (function () {
         const lastTime = localStorage.getItem("ezio_intro_session_time");
         const currentTime = new Date().getTime();
-        const EXPIRATION_TIME = 10 * 1000; // 10 Seconds
+        const EXPIRATION_TIME = 10 * 60 * 1000; // 10 Minutes
 
+        // १० मिनिटांच्या आत परत आल्यास थेट index.html वर पाठवा
         if (
           lastTime &&
           currentTime - parseInt(lastTime, 10) < EXPIRATION_TIME
@@ -26,7 +26,7 @@
           window.location.replace("index.html");
         }
 
-        // 2. Load User's Selected Theme (Dark or Light)
+        // Theme (Dark / Light) Load
         if (localStorage.getItem("ezio-theme") === "dark") {
           document.documentElement.dataset.theme = "dark";
         }
